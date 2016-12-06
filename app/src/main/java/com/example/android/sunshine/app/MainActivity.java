@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+
+
 public class MainActivity extends ActionBarActivity {
 
     @Override
@@ -14,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            int commit = getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new ForecastFragment())
                     .commit();
         }
