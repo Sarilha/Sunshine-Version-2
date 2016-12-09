@@ -113,7 +113,6 @@ public class ForecastFragment extends Fragment {
         @Override
         protected String[] doInBackground(String... params) {
 
-            Log.v(LOG_TAG, "----------------------------------------async task");
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
@@ -167,7 +166,6 @@ public class ForecastFragment extends Fragment {
                 }
                 forecastJsonStr = buffer.toString();
 
-                Log.v("Bla", "--------------------------------------------- help" +forecastJsonStr);
                 return getWeatherDataFromJson(forecastJsonStr, days);
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);

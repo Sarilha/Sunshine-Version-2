@@ -19,7 +19,6 @@ public class DetailActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if(savedInstanceState == null){
-            Log.v("bla", "########################################################");
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new DetailFragment())
                     .commit();
@@ -44,7 +43,6 @@ public class DetailActivity extends ActionBarActivity {
 
             if(null != intent && intent.hasExtra(intent.EXTRA_TEXT)){
                 String message = intent.getStringExtra(intent.EXTRA_TEXT);
-                Log.v("bla", "---------------------------------------------message"+message);
                 TextView detailTextView = (TextView) rootView.findViewById(R.id.detail_text);
                 detailTextView.setText(message);
             }
