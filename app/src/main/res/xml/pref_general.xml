@@ -13,4 +13,12 @@
         android:singleLine="true" />
 
 
+    <ListPreference
+        android:title="@string/pref_type_name"
+        android:key="@string/pref_type_key"
+        android:defaultValue="@string/pref_type_default"
+        android:entryValues="@array/pref_list_type_value"
+        android:entries="@array/pref_list_type_entries" />
+
+
 </PreferenceScreen>
