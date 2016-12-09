@@ -3,9 +3,12 @@ package com.example.android.sunshine.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +51,33 @@ public class DetailActivity extends ActionBarActivity {
 
     public static class DetailFragment extends Fragment {
 
-        public DetailFragment() {
+        private static final String SHARE_STRING = "#SunshineApp";
+        private String mForeString;
 
+        public DetailFragment() {
+            setHasOptionsMenu(true);
+        }
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.detailfragment, menu);
+
+            /*
+            MenuItem shareItem = menu.findItem(R.id.action_share);
+            ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+*/
+
+            ShareActionProvider mShareActionProvider = new ShareActionProvider(getActivity());
+            mShareActionProvider.setShareIntent(createShareForecasIntent());
+            MenuItemCompat.setActionProvider(menu.findItem(R.id.action_share), mShareActionProvider);
+
+            /*
+            if(mShareActionProvider != null){
+                mShareActionProvider.setShareIntent(createShareForecasIntent());
+            } else {
+                Log.d("DetailFragment", "share action is null");
+            }
+            */
         }
 
         @Override
@@ -60,14 +88,23 @@ public class DetailActivity extends ActionBarActivity {
             Intent intent = getActivity().getIntent();
 
             if(null != intent && intent.hasExtra(intent.EXTRA_TEXT)){
-                String message = intent.getStringExtra(intent.EXTRA_TEXT);
+                mForeString = intent.getStringExtra(intent.EXTRA_TEXT);
                 TextView detailTextView = (TextView) rootView.findViewById(R.id.detail_text);
-                detailTextView.setText(message);
+                detailTextView.setText(mForeString);
             }
 
             return rootView;
 
         }
+
+        private Intent createShareForecasIntent() {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, mForeString + SHARE_STRING);
+            return shareIntent;
+        }
+
     }
 
 }
