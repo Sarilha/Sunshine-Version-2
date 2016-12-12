@@ -17,6 +17,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v("DebugExample", "On create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -72,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
     }
+
 
 }
 
